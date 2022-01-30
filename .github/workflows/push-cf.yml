@@ -33,16 +33,7 @@ jobs:
         shell: bash
       - name: Log into IBM Cloud
         run: |
-          export IBMCLOUD_API_KEY = $IBM_CLOUD_API
-          ibmcloud login
-        shell: bash
-      - name: target region
-        run: |
-          ibmcloud target -r $IBM_CLOUD_REGION
-        shell: bash
-      - name: target group
-        run: |
-          ibmcloud target -g $IBM_CLOUD_GROUP
+          ibmcloud login -r $IBM_CLOUD_REGION -g $IBM_CLOUD_GROUP --apikey "$IBM_CLOUD_API"
         shell: bash
       - name: Target CF
         run: ibmcloud target --cf-api https://api.$IBM_CLOUD_REGION.cf.cloud.ibm.com -r $IBM_CLOUD_REGION -o $IBM_CLOUD_ORG -s $IBM_CLOUD_SPACE
