@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dealership Capstone</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link
+      href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="{% url 'djangoapp:index' %}"
+        >Dealership Reviews</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="{% url 'djangoapp:index' %}"
+            >Home <span class="sr-only">(current)</span></a
+          >
+          <a class="nav-item nav-link" href="{% url 'djangoapp:about_us' %}"
+            >About Us</a
+          >
+          <a class="nav-item nav-link" href="{% url 'djangoapp:contact_us' %}"
+            >Contact Us</a
+          >
+          <a class="nav-item nav-link disabled" href="#">Thanks!</a>
+        </div>
+      </div>
+
+      {% if user.is_authenticated %}
+      <a
+        class="nav-item nav-link active bg-dark m-4 p-3"
+        href="{% url 'djangoapp:add_review' %}"
+        >Add a review <span class="sr-only">(current)</span></a
+      >
+      <div class="navbar navbar-light bg-light justify-content-between">
+        <h4>Hey, {{user.username}}. We won't hold you |</h4>
+        <script>
+          // Neccessary to circumvent the extra quotation marks error that are needed to insert this django syntax
+          // It could have just been done as a styled link, but I wanted to use a button.
+          // I wouldn't use this script section for compatibility on something meant for production
+          logout = () => {
+            window.location.href = "{% url 'djangoapp:logout' %}";
+          };
+        </script>
+        <button
+          type="button"
+          class="btn btn-outline-primary ml-1"
+          onclick="logout()"
+        >
+          Log Out
+        </button>
+      </div>
+      {% else %}
+      <div class="navbar navbar-light bg-light justify-content-between">
+        <form class="form-inline" method="POST">
+          {% csrf_token %}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">@</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              name="Username"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+            <input
+              type="password"
+              class="form-control"
+              name="Password"
+              placeholder="Password"
+              aria-label="Password"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <script>
+            // Neccessary to circumvent the extra quotation marks error that are needed to insert this django syntax
+            // It could have just been done as a styled link, but I wanted to use a button.
+            // I wouldn't use this script section for compatibility on something meant for production
+            account_form = () => {
+              window.location.href = "{% url 'djangoapp:register_account' %}";
+            };
+          </script>
+          <button
+            type="button"
+            class="btn btn-outline-primary ml-1"
+            onclick="account_form()"
+          >
+            Sign Up
+          </button>
+          <input
+            type="submit"
+            class="btn btn-outline-secondary ml-2"
+            value="Log In"
+          />
+        </form>
+      </div>
+      {% endif %}
+    </nav>
+    <div class="content">{% block content %} {% endblock %}</div>
+  </body>
+</html>

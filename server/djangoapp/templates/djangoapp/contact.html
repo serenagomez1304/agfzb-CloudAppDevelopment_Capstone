@@ -1,0 +1,25 @@
+{% extends 'djangoapp/base.html' %}
+
+<section class="title">{% block title %} About Us {% endblock %}</section>
+
+<section class="body_block">
+  {% block content %}
+
+  <div class="card text-center">
+    <div class="card-header">Best Cars dealership</div>
+    <div class="card-body">
+      <h5 class="card-title">Want to reach out?</h5>
+      <p class="card-text">That's exactly what we want you to do.</p>
+    </div>
+    <div class="card-footer text-muted">123456789.999999999 days ago</div>
+    <footer>
+      <address>
+        Box 999, Almertia Way, OV <br />
+        LSIxY Planet X <br />
+        <a href="tel:+011111111">+011111111</a>
+      </address>
+    </footer>
+  </div>
+
+  {% endblock %}
+</section>

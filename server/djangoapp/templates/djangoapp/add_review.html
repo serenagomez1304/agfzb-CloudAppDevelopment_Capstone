@@ -1,16 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-</head>
-    <body>
-    <!--Add review form here -->
-    </body>
-</html>
+{% extends "djangoapp/base.html" %}
+<!-- -->
+{% block title %} Dealership Index {% endblock %}
+<!-- -->
+{% block content %} {% if default_payload %}
+<h4 class="m-1 p-2 jumbotron">
+  What did you think about one of the dealerships?
+</h4>
+<form class="m-2 p-4 card" method="POST">
+  {% csrf_token %}
+  <div class="form-group row">
+    <label class="col-sm-3" for="car_year">Car Year:</label>
+    <input
+      name="car_year"
+      type="text"
+      class="form-control col-sm-9"
+      id="car_year"
+      placeholder="{{default_payload.defaults.car_year}}"
+      rows="1"
+    />
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3" for="car_make">Car Make:</label>
+    <input
+      name="car_make"
+      type="text"
+      class="form-control col-sm-9"
+      id="car_make"
+      placeholder="{{default_payload.defaults.car_make}}"
+      rows="1"
+    />
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3" for="car_model">Car Model:</label>
+    <input
+      name="car_model"
+      type="text"
+      class="form-control col-sm-9"
+      id="car_model"
+      placeholder="{{default_payload.defaults.car_model}}"
+      rows="1"
+    />
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3" for="purchase_date">Purchase Date:</label>
+    <input
+      name="purchase_date"
+      type="text"
+      class="form-control col-sm-9"
+      id="purchase_date"
+      placeholder="{{default_payload.defaults.purchase_date}}"
+      rows="1"
+    />
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3" for="dealership_review">Dealership Review:</label>
+    <input
+      name="dealership_review"
+      type="text"
+      class="form-control col-sm-9"
+      id="dealership_review"
+      placeholder="{{default_payload.defaults.dealership_review}}"
+      rows="1"
+    />
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3" for="dealership"
+      >Dealership (1-50) (Use the front page to locate their number):</label
+    >
+    <input
+      name="dealership"
+      type="text"
+      class="form-control col-sm-9"
+      id="dealership"
+      placeholder="{{default_payload.defaults.dealership}}"
+      rows="1"
+    />
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-3" for="sentiment">Sentiment:</label>
+    <input
+      name="sentiment"
+      type="text"
+      class="form-control col-sm-9"
+      id="sentiment"
+      placeholder="{{default_payload.defaults.sentiment}}"
+      rows="1"
+    />
+  </div>
+  <input
+    type="submit"
+    class="btn btn-outline-secondary p-4"
+    value="Add your review"
+  />
+</form>
+{% else %}
+<div
+  class="alert alert-danger alert-dismissible fade show m-2 p-4"
+  role="alert"
+>
+  <strong>Response Error!</strong> Something went wrong. Please try to refresh
+  the page.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <p class="card-text">This is the error message for the page.</p>
+</div>
+{% endif %} {% endblock %}

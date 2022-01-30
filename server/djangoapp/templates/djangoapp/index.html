@@ -1,25 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+{% extends "djangoapp/base.html" %}
+<!-- -->
+{% block title %} Dealership Index {% endblock %}
+<!-- -->
+{% block content %}
+<table class='table table-bordered table-dark' id='table' data-filter-control='true'>
+  <thead>
+    <tr>
+      <th scope='col'>ID</th>
+      <th scope='col'>Dealer Name</th>
+      <th scope='col'>City</th>
+      <th scope='col'>Addresss</th>
+      <th scope='col'>Zip</th>
+      <th scope='col' data-field='state' data-filter-control='select'>State</th>
+    </tr>
+  </thead>
 
-</head>
-
-    <body>
-    <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
-    <!--Add a nav bar here -->
-
-    <!--Add a dealer table here -->
-
-    </body>
-
-</html>
+  <script>
+    $(function() {$('#table').bootstrapTable()})
+  </script>
+  
+  <tbody>
+    {% for key in dealerships %}
+    <tr>
+      <td scope='row'>{{key.id}}</th>
+      <td scope='row'><a class="link-info" href="/dealership/reviews/{{key.id}}">{{key}}</a></td>
+      <td scope='row'>{{key.city}}</td>
+      <td scope='row'>{{key.address}}</td>
+      <td scope='row'>{{key.zip}}</td>
+      <td scope='row'>{{key.st}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

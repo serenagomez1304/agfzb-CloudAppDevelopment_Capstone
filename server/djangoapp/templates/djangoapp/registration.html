@@ -1,11 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-    <body>
-    <!--Add a registration form here -->
-    </body>
-</html>
+{% extends "djangoapp/base.html" %}
+
+<!-- -->
+
+{% block title %} Dealership Index {% endblock %}
+
+<!-- -->
+
+{% block content %}
+
+<section id="new_user_boolean_heading">
+  {% if saved %}
+  <h3 class="jumbotron text-center p-4 bg-success">
+    You registered, and now you can log in!
+  </h3>
+  {% endif %}
+</section>
+
+<form method="POST" action="">
+  {% csrf_token %}
+
+  <div class="login_form card jumbotron text-center m-2 p-4">
+    <h2 class="jumbotron p-4">Register your name here</h2>
+
+    <table class="bg-secondary mb-2 p-4">
+      {{form.as_table}}
+    </table>
+    <input
+      class="btn-primary p-2 w-100"
+      type="submit"
+      name="create_user"
+      value="Click to sign up"
+    />
+  </div>
+</form>
+
+{% endblock %}

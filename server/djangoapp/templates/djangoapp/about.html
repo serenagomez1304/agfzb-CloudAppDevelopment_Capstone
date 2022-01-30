@@ -1,0 +1,21 @@
+{% extends 'djangoapp/base.html' %}
+
+<section class="title">{% block title %} About Us {% endblock %}</section>
+
+<section class="body_block">
+  {% block content %}
+
+  <div class="card text-center">
+    <div class="card-header">Best Cars dealership</div>
+    <div class="card-body">
+      <h5 class="card-title">About us</h5>
+      <p class="card-text">
+        Welcome to Best Cars dealership, home to the best cars in North America.
+        We sell domestic and imported cars at reasonable prices.
+      </p>
+    </div>
+    <div class="card-footer text-muted">10 days ago</div>
+  </div>
+
+  {% endblock %}
+</section>

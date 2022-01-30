@@ -1,18 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-
-    <body>
-
-    <!--Add a nav bar here -->
-
-    <!-- Add reviews as cards -->
-
-    </body>
-
-</html>
+{% extends "djangoapp/base.html" %}
+<!-- -->
+{% block title %} Dealership Index {% endblock %}
+<!-- -->
+{% block content %}
+{% if reviews %}
+<div class="row">
+  {% for review in reviews %}
+  <div class="col-sm-4 p-4">
+    <div class="card">
+      <div class="card-header">
+      {% if review.sentiment == "positive" %}
+        <img class="card-img-left" src="{{MEDIA_URL}}emoji/positive.png" width="25px">
+      {% elif review.sentiment == "negative" %}
+        <img class="card-img-left" src="{{MEDIA_URL}}emoji/negative.png" width="25px">
+      {% elif review.sentiment == "neutral" %}
+        <img class="card-img-left" src="{{MEDIA_URL}}emoji/neutral.png" width="25px">
+      {% endif %}
+      </div>
+      <div class="card-body">
+        <h2 class="card-title p-1">{{review.car_year}} {{review.car_make}} {{review.car_model}}</h5>
+        <h4 class="p-2">Purchased: {{review.purchase_date}}</h4>
+        <p class="card-text p-4">
+          {{review.review}}
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card">
+  <div class="card-header">
+    Oh no!
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>This dealership does not have any reviews yet.</p>
+      <img class="card-img-left" src="{{MEDIA_URL}}emoji/negative.png" width="25px">
+      <footer class="blockquote-footer">We wonder who will be the first?</cite></footer>
+    </blockquote>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
