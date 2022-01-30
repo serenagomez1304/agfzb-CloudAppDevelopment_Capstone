@@ -34,7 +34,13 @@ jobs:
       - name: Log into IBM Cloud
         run: |
           ibmcloud login --apikey "$IBM_CLOUD_API"
+        shell: bash
+      - name: target region
+        run: |
           ibmcloud target -r "$IBM_CLOUD_REGION" -q
+        shell: bash
+      - name: target group
+        run: |
           ibmcloud target -g "$IBM_CLOUD_GROUP" -q
         shell: bash
       - name: Target CF
