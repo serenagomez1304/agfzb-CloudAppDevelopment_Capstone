@@ -33,7 +33,7 @@ jobs:
         shell: bash
       - name: Log into IBM Cloud
         run: |
-          ibmcloud login --apikey "$IBM_CLOUD_API"
+          ibmcloud login --apikey "$IBM_CLOUD_API" -r "us-south"
         shell: bash
       - name: target region
         run: |
